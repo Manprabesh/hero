@@ -3,58 +3,57 @@ import multer from "multer"
 const app = express()
 app.use(express.json())
 
+
+import database from "./config/database.js"
+
 import fs from 'node:fs';
 
 const folderName = process.cwd() + '/Users/uploads';
 
-const storage = multer.diskStorage({
-	destination: function (req, file, cb) {
-		cb(null, "./uploads")
-	},
-	filename: function (req, file, cb) {
 
-		cb(null, file.originalname)
-		console.log(file.originalname);
-
-		console.log("incoming file")
-
-	}
-})
+import storage from "./config/multer.js"
 
 const upload = multer({ storage: storage })
-app.get('/', (req, res) => {
-	res.send("hello dev'v")
+
+app.get('/', async(req, res) => {
+	res.send("hello dev'v");
+
+	// const client = createClient({
+	// 	username: 'default',
+	// 	password: 'b1LtYYq3am68d6tHBEt5l1O0ICew061W',
+	// 	socket: {
+	// 		host: 'redis-18295.c74.us-east-1-4.ec2.redns.redis-cloud.com',
+	// 		port: 18295
+	// 	}
+	// });
+
+	// client.on('error', err => console.log('Redis Client Error', err));
+
+	// await client.connect();
+
+	// await client.set('foo', 'bar');
+	// const result = await client.get('foo');
+	// console.log(result)  // >>> bar
+
+
+
+	return res.json("data ok")
+
 })
 
-try {
-	app.post('/user/signup', (req, res) => {
-		// try {
-		// 	fs.mkdir('./uploads', { recursive: true }, (err) => {
 
-		// 		console.log(err);
+// import redis from 'redis'
+import { createClient } from 'redis';
 
-		// 	});
-		// } catch (error) {
-		// 	// throw (err)
-		// 	console.error(error)
-		// }
 
-		const { user_name, phn_no, address, contact } = req.body
-		// console.log(req);
+import user_info from "./router/user_information.js"
+app.use(user_info)
 
-		console.log(user_name);
-		console.log(phn_no);
-		console.log(address);
-		console.log(contact);
 
-		//saved in the database
 
-		return res.json("data sent")
 
-	})
+app.listen(3000, () => {
+	console.log("listen");
 
-} catch (error) {
-
-}
-
-app.listen(3000)
+	database()
+})
