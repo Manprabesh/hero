@@ -46,10 +46,11 @@ app.get('/', async(req, res) => {
 import { createClient } from 'redis';
 
 
-import user_info from "./router/user_information.js"
-app.use(user_info)
+import userRouter from "./router/userRoutes.js";
+app.use("/api/users/", userRouter);
 
-
+import helpRouter from "./router/helpRoutes.js"
+app.use("/api/help/", helpRouter);
 
 
 app.listen(3000, () => {
