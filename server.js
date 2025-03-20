@@ -50,7 +50,7 @@ import userRouter from "./router/userRoutes.js";
 app.use("/api/users/", userRouter);
 
 import helpRouter from "./router/helpRoutes.js"
-app.use("/api/help/", helpRouter);
+app.use("/api/helps/", helpRouter);
 
 
 app.listen(3000, () => {
