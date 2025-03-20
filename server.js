@@ -42,10 +42,6 @@ app.get('/', async(req, res) => {
 })
 
 
-// import redis from 'redis'
-import { createClient } from 'redis';
-
-
 import userRouter from "./router/userRoutes.js";
 app.use("/api/users/", userRouter);
 
