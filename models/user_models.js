@@ -10,8 +10,8 @@ const user=new Schema({
     contacts:{
         type:{}
     },
-    location:{
-        type:[]
+    phn_no:{
+       type:String
     }
 })
 
